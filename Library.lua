@@ -1380,7 +1380,7 @@ function Library:MakeDraggable(UI: GuiObject, DragFrame: GuiObject, IgnoreToggle
     local Dragging = false
     local Changed
     DragFrame.InputBegan:Connect(function(Input: InputObject)
-        if not IsClickInput(Input) or IsMainWindow and Library.CantDragForced then
+        if not IsClickInput(Input) and Library.CantDragForced then
             return
         end
 
@@ -1403,7 +1403,7 @@ function Library:MakeDraggable(UI: GuiObject, DragFrame: GuiObject, IgnoreToggle
     Library:GiveSignal(UserInputService.InputChanged:Connect(function(Input: InputObject)
         if
             (not IgnoreToggled and not Library.Toggled)
-            or (IsMainWindow and Library.CantDragForced)
+            or (Library.CantDragForced)
             or not (ScreenGui and ScreenGui.Parent)
         then
             Dragging = false
